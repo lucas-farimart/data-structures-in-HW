@@ -1,0 +1,104 @@
+xrun(64): 23.09-s003: (c) Copyright 1995-2023 Cadence Design Systems, Inc.
+TOOL:	xrun(64)	23.09-s003: Started on Jun 16, 2026 at 20:03:15 -03
+xrun
+	-sv
+	-64
+	-access +rwc
+	-timescale 1ns/1ns
+	../rtl-codes/sparse_shift_buff.sv
+	../test-benches/tb_sparseFIFO.sv
+	-top tb_sparseFIFO
+	-gui
+	-s
+Recompiling... reason: file '../test-benches/tb_sparseFIFO.sv' is newer than expected.
+	expected: Tue Jun 16 19:34:56 2026
+	actual:   Tue Jun 16 20:01:56 2026
+file: ../test-benches/tb_sparseFIFO.sv
+	module worklib.tb_sparseFIFO:sv
+		errors: 0, warnings: 0
+	Elaborating the design hierarchy:
+		Caching library 'worklib' ....... Done
+	Top level design units:
+		tb_sparseFIFO
+	Building instance overlay tables: .................... Done
+	Generating native compiled code:
+		worklib.tb_sparseFIFO:sv <0x5591a536>
+			streams:   9, words: 10537
+	Building instance specific data structures.
+	Loading native compiled code:     .................... Done
+	Design hierarchy summary:
+		                 Instances  Unique
+		Modules:                 2       2
+		Registers:              11      11
+		Scalar wires:            3       -
+		Vectored wires:          3       -
+		Always blocks:           2       2
+		Initial blocks:          3       3
+		Pseudo assignments:      5       -
+		Process Clocks:          1       1
+		Simulation timescale:  1ns
+	Writing initial simulation snapshot: worklib.tb_sparseFIFO:sv
+xmsim: *W,NOMTDGUI: Multi-Threaded Dumping is disabled for interactive debug mode.
+xcelium> 
+xcelium> source /Tools/cadence/XCELIUM2309/tools/xcelium/files/xmsimrc
+xcelium> 
+-------------------------------------
+Relinquished control to SimVision...
+# Restoring simulation environment...
+xcelium> input -quiet .reinvoke.sim
+xcelium> file delete .reinvoke.sim
+xcelium> run
+  ___                          ___ ___ ___ ___    _____       _        
+ / __|_ __  __ _ _ _ ___ ___  | __|_ _| __/ _ \  |_   _|__ __| |_     
+ \__ \ '_ \/ _` | '_(_-</ -_) | _| | || _| (_) |   | |/ -_|_-<  _|  
+ |___/ .__/\__,_|_| /__/\___| |_| |___|_| \___/    |_|\___/__/\__|
+     |_|                                                               
+[75] IN=0 | 0 0 0 0 0 0 0 0 
+[85] IN=11 | 0 0 0 0 0 0 0 11 
+[95] IN=0 | 0 0 0 0 0 0 11 0 
+[105] IN=25 | 0 0 0 0 11 11 0 25 
+[115] IN=33 | 0 0 11 11 11 0 25 33 
+[125] IN=0 | 11 11 11 11 25 25 33 0 
+[135] IN=0 | 11 11 11 25 25 33 0 0 
+[145] IN=14 | 11 11 25 25 33 0 0 14 
+[155] IN=9 | 11 25 25 33 0 0 14 9 
+[165] IN=0 | 25 25 33 0 14 14 9 0 
+[175] IN=77 | 25 33 14 14 14 9 0 77 
+[185] IN=0 | 33 14 14 14 9 0 77 0 
+[195] IN=0 | 14 14 14 9 77 77 0 0 
+[205] IN=52 | 14 14 9 77 77 0 0 52 
+[215] IN=0 | 14 9 77 77 0 0 52 0 
+[225] IN=88 | 9 77 77 0 52 52 0 88 
+[235] IN=17 | 77 77 52 52 52 0 88 17 
+[245] IN=0 | 77 52 52 52 88 88 17 0 
+[255] IN=0 | 52 52 52 88 88 17 0 0 
+[265] IN=23 | 52 52 88 88 17 0 0 23 
+[275] IN=91 | 52 88 88 17 0 0 23 91 
+[285] IN=0 | 88 88 17 0 23 23 91 0 
+[295] IN=0 | 88 17 23 23 23 91 0 0 
+[305] IN=7 | 17 23 23 23 91 0 0 7 
+[315] IN=5 | 23 23 23 91 0 0 7 5 
+[325] IN=0 | 23 23 91 0 7 7 5 0 
+[335] IN=61 | 23 91 7 7 7 5 0 61 
+[345] IN=0 | 91 7 7 7 5 0 61 0 
+[355] IN=0 | 7 7 7 5 61 61 0 0 
+[365] IN=42 | 7 7 5 61 61 0 0 42 
+[375] IN=0 | 7 5 61 61 0 0 42 0 
+[385] IN=13 | 5 61 61 0 42 42 0 13 
+[395] IN=0 | 61 61 42 42 42 0 13 0 
+[405] IN=0 | 61 42 42 42 13 13 0 0 
+[415] IN=0 | 42 42 42 13 13 0 0 0 
+[425] IN=0 | 42 42 13 13 0 0 0 0 
+[435] IN=0 | 42 13 13 0 0 0 0 0 
+[445] IN=0 | 13 13 0 0 0 0 0 0 
+[455] IN=0 | 13 0 0 0 0 0 0 0 
+[465] IN=0 | 0 0 0 0 0 0 0 0 
+[475] IN=0 | 0 0 0 0 0 0 0 0 
+[485] IN=0 | 0 0 0 0 0 0 0 0 
+Simulation complete via $finish(1) at time 1485 NS + 0
+../test-benches/tb_sparseFIFO.sv:123         #1us  $finish;
+xcelium> ^C
+xcelium> exit
+...Regained control from SimVision
+-------------------------------------
+TOOL:	xrun(64)	23.09-s003: Exiting on Jun 16, 2026 at 20:07:14 -03  (total: 00:03:59)

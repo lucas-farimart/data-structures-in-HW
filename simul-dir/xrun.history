@@ -1,0 +1,2 @@
+s1(16Jun2026:19:51:20):  xrun -sv -64 -access +rwc -timescale 1ns/1ns ../rtl-codes/sparse_shift_buff.sv ../test-benches/tb_sparseFIFO.sv -top tb_sparseFIFO -gui 
+s2(16Jun2026:20:03:15):  xrun -sv -64 -access +rwc -timescale 1ns/1ns ../rtl-codes/sparse_shift_buff.sv ../test-benches/tb_sparseFIFO.sv -top tb_sparseFIFO -gui "-s " 

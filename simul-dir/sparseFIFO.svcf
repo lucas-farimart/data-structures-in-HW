@@ -1,0 +1,178 @@
+# SimVision Command Script (Tue Jun 16 18:05:11 -03 2026)
+#
+# Version 23.09.s003
+#
+# You can restore this configuration with:
+#
+#     simvision -input /home/lucas.martins/workspace/itaporan/work/waves_svcf/sparseFIFO.svcf
+#  or simvision -input /home/lucas.martins/workspace/itaporan/work/waves_svcf/sparseFIFO.svcf database1 database2 ...
+#
+
+
+#
+# Preferences
+#
+preferences set toolbar-Standard-WatchWindow {
+  usual
+  shown 0
+}
+preferences set toolbar-txe_waveform_navigate-WaveWindow {
+  usual
+  shown 1
+  position -row 3
+}
+preferences set expand-attributes begin_time
+preferences set plugin-enable-svdatabrowser-new 1
+preferences set toolbar-Windows-WatchWindow {
+  usual
+  shown 0
+}
+preferences set toolbar-Search-Console {
+  usual
+  position -anchor e
+}
+preferences set toolbar-txe_waveform_toggle-WaveWindow {
+  usual
+  position -pos 1
+}
+preferences set plugin-enable-groupscope 0
+preferences set toolbar-txe_waveform_view-WaveWindow {
+  usual
+  shown 1
+  position -row 3
+}
+preferences set standard-methodology-filtering 1
+preferences set plugin-enable-interleaveandcompare 0
+preferences set plugin-enable-waveformfrequencyplot 0
+preferences set toolbar-SimControl-WatchWindow {
+  usual
+  shown 0
+}
+preferences set toolbar-Windows-WaveWindow {
+  usual
+  position -pos 2
+}
+preferences set toolbar-WaveZoom-WaveWindow {
+  usual
+  position -anchor w
+}
+preferences set toolbar-TimeSearch-WatchWindow {
+  usual
+  shown 0
+}
+
+#
+# PPE data
+#
+array set dbNames ""
+set dbNames(realName1) [database require waves  -hints {
+	file ./waves.shm/waves.trn
+	file /home/lucas.martins/workspace/itaporan/work/waves.shm/waves.trn
+}]
+
+#
+# Mnemonic Maps
+#
+mmap new  -reuse -name {Boolean as Logic} -radix %b -contents {{%c=FALSE -edgepriority 1 -shape low}
+{%c=TRUE -edgepriority 1 -shape high}}
+mmap new  -reuse -name {Example Map} -radix %x -contents {{%b=11???? -bgcolor orange -label REG:%x -linecolor yellow -shape bus}
+{%x=1F -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=2C -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=* -label %x -linecolor gray -shape bus}}
+
+#
+# Waveform windows
+#
+if {[catch {window new WaveWindow -name "Waveform 1" -geometry 1920x1016+-1+26}] != ""} {
+    window geometry "Waveform 1" 1920x1016+-1+26
+}
+window target "Waveform 1" on
+waveform using {Waveform 1}
+waveform sidebar select designbrowser
+waveform set \
+    -primarycursor TimeA \
+    -signalnames name \
+    -signalwidth 175 \
+    -units ns \
+    -valuewidth 75
+waveform baseline set -time 0
+
+set id [waveform add -signals [subst  {
+	{simulator::[format {tb_sparseFIFO.SIZE_B}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{simulator::[format {tb_sparseFIFO.SIZE_D}]}
+	} ]]
+set id [waveform add -cdivider divider]
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {tb_sparseFIFO.clk}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {tb_sparseFIFO.rst_n}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {tb_sparseFIFO.enb_i}]}
+	} ]]
+set id [waveform add -cdivider divider]
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {tb_sparseFIFO.data_vec[0:31]}]}
+	} ]]
+waveform format $id -color #ffbc00 -namecolor #ffbc00
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {tb_sparseFIFO.sbuff_i[7:0]}]}
+	} ]]
+waveform format $id -color #ffbc00 -namecolor #ffbc00
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {tb_sparseFIFO.sbuff_o[7:0]}]}
+	} ]]
+waveform format $id -color #ffbc00 -namecolor #ffbc00
+set id [waveform add -cdivider divider]
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {tb_sparseFIFO.dut.shiftbuff[0:7]}]}
+	} ]]
+waveform format $id -color #00ffff -namecolor #00ffff
+waveform hierarchy expand $id
+set id2 [lindex [waveform hierarchy content $id] 0]
+waveform format $id2 -color #00ffff -namecolor #00ffff
+set id2 [lindex [waveform hierarchy content $id] 1]
+waveform format $id2 -color #00ffff -namecolor #00ffff
+set id2 [lindex [waveform hierarchy content $id] 2]
+waveform format $id2 -color #00ffff -namecolor #00ffff
+set id2 [lindex [waveform hierarchy content $id] 3]
+waveform format $id2 -color #00ffff -namecolor #00ffff
+set id2 [lindex [waveform hierarchy content $id] 4]
+waveform format $id2 -color #00ffff -namecolor #00ffff
+set id2 [lindex [waveform hierarchy content $id] 5]
+waveform format $id2 -color #00ffff -namecolor #00ffff
+set id2 [lindex [waveform hierarchy content $id] 6]
+waveform format $id2 -color #00ffff -namecolor #00ffff
+set id2 [lindex [waveform hierarchy content $id] 7]
+waveform format $id2 -color #00ffff -namecolor #00ffff
+set id [waveform add -signals [subst  {
+	{$dbNames(realName1)::[format {tb_sparseFIFO.dut.zero_poss[0:2]}]}
+	} ]]
+waveform format $id -color #00ff99 -namecolor #00ff99
+waveform hierarchy expand $id
+set id2 [lindex [waveform hierarchy content $id] 0]
+waveform format $id2 -color #00ff99 -namecolor #00ff99
+set id2 [lindex [waveform hierarchy content $id] 1]
+waveform format $id2 -color #00ff99 -namecolor #00ff99
+set id2 [lindex [waveform hierarchy content $id] 2]
+waveform format $id2 -color #00ff99 -namecolor #00ff99
+
+waveform xview limits 22ns 499ns
+
+#
+# Waveform Window Links
+#
+
+#
+# Console windows
+#
+console set -windowname Console
+window geometry Console 730x250+261+564
+
+#
+# Layout selection
+#
+
