@@ -1,7 +1,7 @@
 //============================================================
-// Module: sparse_shift_sv
-// Description: tentativa de acelerar passagem de dados 
-// relevantes para MAC (vulgo diferentes de zero)
+// Module: Sparse Shift Buffer
+//  Tentativa de acelerar passagem de dados 
+//  relevantes para MAC (vulgo diferentes de zero)
 //------------------------------------------------------------
 // Author: Lucas Farias Martins
 // Email:  lucas.martins@ee.ufcg.edu.br
@@ -24,14 +24,20 @@ module sparse_shiftbuff #(
 
     logic [SIZE_D-1:0] shiftbuff [SIZE_B];
     logic [SIZE_D-1:0] zero_poss [LOG_SB]; 
+    logic              zero_detc [LOG_SB];
 
     //=====================================================
     //                  COMBINATIONAL
     //=====================================================
     always_comb begin
-        zero_poss[0] = (shiftbuff[1] == '0) ? shiftbuff[2] : shiftbuff[1]; 
-        zero_poss[1] = (shiftbuff[3] == '0) ? shiftbuff[4] : shiftbuff[3]; 
-        zero_poss[2] = (shiftbuff[5] == '0) ? shiftbuff[6] : shiftbuff[5];         
+
+        zero_detc[0] = (shiftbuff[1] == '0);
+        zero_detc[1] = (shiftbuff[3] == '0);
+        zero_detc[2] = (shiftbuff[5] == '0);
+
+        zero_poss[0] = (zero_detc[0]) ? shiftbuff[2] : shiftbuff[1]; 
+        zero_poss[1] = (zero_detc[1]) ? shiftbuff[4] : shiftbuff[3]; 
+        zero_poss[2] = (zero_detc[2]) ? shiftbuff[6] : shiftbuff[5];         
     end
 
     //=====================================================
@@ -44,9 +50,10 @@ module sparse_shiftbuff #(
             
             shiftbuff[7] <= sbuff_i;
             shiftbuff[6] <= shiftbuff[7];
-            shiftbuff[5] <= shiftbuff[6];
-            shiftbuff[3] <= shiftbuff[4];
-            shiftbuff[1] <= shiftbuff[2];
+
+            shiftbuff[5] <= (zero_detc[0]) ? '0 : shiftbuff[6];
+            shiftbuff[3] <= (zero_detc[1]) ? '0 : shiftbuff[4];
+            shiftbuff[1] <= (zero_detc[2]) ? '0 : shiftbuff[2];
             
             shiftbuff[4] <= zero_poss[2];
             shiftbuff[2] <= zero_poss[1];

@@ -21,7 +21,8 @@ help:
 	@echo "|     Data Strucuture studies for Hardware    |"
 	@echo "|---------------------------------------------|"
 	@echo "| Spare-aware FIFO       | sparse-fifo        |"
-	@echo "| Future work            |                    |"
+	@echo "| DCL Buffer             | dcl-buff           |"
+	@echo "| Future work            \                    |"
 	@echo "|------------------------|--------------------|"
 	@echo "" 
 
@@ -29,17 +30,19 @@ sparse-fifo:
 	clear
 	@echo "Running Sparse FIFO (GUI)..."
 	$(XRUN) $(XRUN_FLAGS) \
-	../rtl-codes/sparse_shift_buff.sv ../test-benches/tb_sparseFIFO.sv \
+	../sparse-fifo/sparse_shift_buff.sv ../sparse-fifo/tb_sparseFIFO.sv \
 	-top tb_sparseFIFO -gui 
+
+dcl-buff:
+	clear
+	@echo "Running Doubly Circular Linked Buffer (DCLB)..."
+	$(XRUN) $(XRUN_FLAGS) \
+	../dclb/dcl_buffer.sv ../dclb/tb_dclb.sv \
+	-top tb_dclb -gui 
 
 #========================================================
 #                COMANDOS UTEIS EXTRAS
 #========================================================
-
-debug:
-	@mkdir -p $(WAVE_DIR)
-	$(XRUN) $(XRUN_FLAGS) $(SRCS) -top $(TOP) -messages -linedebug -access +rwc $(WAVE_FLAGS)
-
 clean:
 	rm -rf $(BUILD_DIR) *.log *.history $(WAVE_DIR) *.shm
 
