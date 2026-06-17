@@ -11,3 +11,4 @@ The first implementation is a Sparsity-Aware FIFO, a data structure with the abi
 ## 2. Doubly Circular Linked Buffer (DCLB)
 This implementation was made on the ideia of reuse data at maximum when the processing elements (i.e. MAC) is at minimal.
 
+<img width="1236" height="961" alt="DCLB" src="https://github.com/user-attachments/assets/b6864f20-8c3e-4dec-bda6-a74dd679ac08" />
